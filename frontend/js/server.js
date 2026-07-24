@@ -72,8 +72,11 @@ async function displayProducts(config) {
             const div = document.createElement("div");
             div.className = config.route;
             div.innerHTML = `
-                <h2>${item.name}</h2>
-                <span>R$: ${item.price} | ${item[config.measure]} ${config.unit}</span>
+                <div class="info-area">
+                    <h2>${item.name}</h2>
+                    <span>R$: ${item.price} | ${item[config.measure]} ${config.unit}</span>
+                </div>
+
                 <div class="btn-area">
                     <button type="button" id="deleteBtn" onclick="deleteObject(${config.route}, ${item.id})">Excluir</button>
                     <button type="button" id="editBtn" onclick="editObject(${config.route}, ${item})">Editar</button>
@@ -107,8 +110,9 @@ async function deleteObject(route, id) {
     }
 }
 
-function changeProduct(type) {
+function changeProduct(type, button) {
     const cards = document.querySelectorAll(".card");
+    const slider = document.querySelector(".slider");
     const form = document.getElementById("form");
     const item = document.querySelector(".form-item.change");
 
@@ -125,16 +129,26 @@ function changeProduct(type) {
         }
     });
 
+    document.querySelectorAll(".option").forEach((btn) => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
     if (type !== "food") {
         form.onsubmit = registerDrink;
 
         input.id = "size";
-        label.textContent = 'Tamanho:';
+        label.textContent = "Tamanho:";
+
+        slider.style.transform = "translateX(100%)";
     } else {
         form.onsubmit = registerFood;
-        
+
         input.id = "weight";
-        label.textContent = 'Peso:';
+        label.textContent = "Peso:";
+
+        slider.style.transform = "translateX(0)";
     }
 
     label.setAttribute = ("for", input.id);

@@ -93,12 +93,14 @@
         <section id="menu" class="products-section">
 
             <nav class="nav-menu">
-                <div class="foods-option" id="foodsOption" onclick="changeProduct('food')">
+                <div class="slider"></div>
+
+                <div class="option active" id="foodsOption" onclick="changeProduct('food', this)">
                     <i class="fi fi-sr-bread-loaf"></i>
                     <h2>Comidas</h2>
                 </div>
 
-                <div class="drinks-option" id="drinksOption" onclick="changeProduct('drink')">
+                <div class="option" id="drinksOption" onclick="changeProduct('drink', this)">
                     <i class="fi fi-sr-mug-hot-alt"></i>
                     <h2>Bebidas</h2>
                 </div>

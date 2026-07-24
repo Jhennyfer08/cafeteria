@@ -129,11 +129,17 @@
     gap: 1.2rem;
 
     .nav-menu {
+        position: relative;
+        overflow: hidden;
         width: 100%;
+        border-radius: 1.2rem;
+        margin-left: 2rem;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        background-color: var(--secondary-color);
+        box-shadow: 2px 4px 2px #37623262;
 
         i {
             font-size: 2rem;
@@ -145,22 +151,31 @@
     }
 }
 
-.foods-option,
-.drinks-option {
-    width: 40%;
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 1.2rem;
+    background-color: var(--primary-color);
+    transition: .3s ease;
+    z-index: 0;
+}
+
+.option {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 1.02rem;
-    border-radius: 1.2rem;
     gap: 1.2rem;
-    background-color: var(--primary-color);
-    box-shadow: 2px 4px 2px #37623262;
+    z-index: 1;
     transition: .3s ease;
 
     &:hover {
-        transform: scale(1.05);
+        font-size: 1.2em;
     }
 }
 
@@ -174,14 +189,21 @@ button:hover {
     min-height: 5%;
     flex: 0 0 250px;
     display: flex;
+    flex-direction: row;
+    white-space: nowrap;
     margin: 1.2rem;
 
+    .info-area {
+        width: 50%;
+    }
+
     .btn-area {
-        width: 100%;
+        min-width: 50%;
         display: flex;
         justify-content: flex-end;
+        align-items: flex-end;
         flex-direction: row;
-        gap: 1.2rem;
+        gap: 1rem;
     }
 
     button {
@@ -195,11 +217,11 @@ button:hover {
     }
 
     #deleteBtn {
-        background-color: var(--error-color);
+        background-color: var(--secondary-color);
     }
 
     #editBtn {
-        background-color: var(--edit-color);
+        background-color: var(--primary-color);
     }
 }
 
