@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Varela+Round&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #c0d8bd;
+    --secondary-color: #cea284;
+    --text-color: #301e15;
+
+
+    --error-color: #c24949;
+    --edit-color: #e3c675;
+    --success-color: #74db82;
+}
+
+html,
+.body {
+    height: 100%;
+}
+
+.body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Varela Round", sans-serif;
+    color: var(--text-color);
+}
+
+.header {
+    width: 100%;
+    height: auto;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10vw;
+    background-color: var(--primary-color);
+    border-bottom: 10px solid var(--secondary-color);
+
+    .logo-container {
+        width: 15vw;
+    }
+
+    .logo-container img {
+        width: 100%;
+        object-fit: contain;
+    }
+
+}
+
+.nav {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    gap: 2rem;
+
+    input {
+        width: 100%;
+        outline: none;
+        padding: .8rem;
+        border: none;
+        border-radius: 2rem;
+    }
+
+    ul li {
+        display: inline-block;
+        font-size: 1.7rem;
+        font-weight: bold;
+        margin: 0rem 1.5rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.main {
+    width: 100%;
+    padding: 3vw 10vw;
+    flex: 1;
+
+    /* .banner {} */
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    gap: 2rem;
+
+    .card {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .menu-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+        margin: 1.2rem 0rem;
+    }
+
+    .menu-nav i {
+        font-size: 2.4rem;
+        /* color: var(--secondary-color); */
+    }
+
+    .menu-nav span {
+        width: 100%;
+        height: 2px;
+        background-color: var(--secondary-color);
+    }
+}
+
+.drinks,
+.foods {
+    min-width: 10%;
+    flex: 0 0 250px;
+    padding: 1rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: 2px 2px 6px var(--secondary-color);
+    cursor: pointer;
+    transition: .3s ease;
+
+    .fi-sr-circle-xmark{
+        display: flex;
+        align-self: flex-end;
+        font-size: 1.2rem;
+        color: var(--error-color);
+    }
+
+    img {
+        width: 100%;
+        min-height: 12rem;
+    }
+
+    span {
+        margin-top: auto;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    &:hover {
+        transform: scale(1.03);
+        /* filter: brightness(130%); */
+    }
+}
+
+.footer {
+    width: 100%;
+    padding: 2vw 10vw;
+    background-color: var(--secondary-color);
+}

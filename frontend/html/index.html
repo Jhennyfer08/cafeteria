@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="shortcut icon" href="../img/logo/koppii.ico" type="image/x-icon">
+    <link rel="stylesheet"
+        href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <script src="../js/server.js"></script>
+    <title>Cafeteria - Koppii</title>
+</head>
+
+<body onload="initIndex()" class="body">
+    <header class="header">
+        <div class="logo-container">
+            <img src="../img/logo/koppii_logo.svg" alt="Logo da Cafeteria Koppii">
+        </div>
+
+        <nav class="nav">
+            <input type="text" placeholder="Buscar.." aria-label="Input de busca">
+
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="./register.html">Cadastro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="banner" role="banner">
+            <div class="slider">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+        </div>
+
+        <section id="menu" class="section">
+
+            <div class="menu-nav">
+                <i class="fi fi-sr-mug-hot-alt"></i>
+                <h2>Bebidas</h2>
+                <span></span>
+            </div>
+            <div class="card" id="drinks"></div>
+
+            <div class="menu-nav">
+                <i class="fi fi-sr-bread-loaf"></i>
+                <h2>Comidas</h2>
+                <span></span>
+            </div>
+            <div class="card" id="foods"></div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h1>Kopppii</h1>
+        <nav class="nav">
+        </nav>
+    </footer>
+</body>
+
+</html>
