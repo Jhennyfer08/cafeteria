@@ -3,28 +3,30 @@ DROP DATABASE IF EXISTS cafeteria;
 
 USE coffee_shop;
 
-DROP TABLE IF EXISTS comidas;
-DROP TABLE IF EXISTS bebidas;
+DROP TABLE IF EXISTS foods;
+DROP TABLE IF EXISTS drinks;
 
 
 CREATE TABLE IF NOT EXISTS foods(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(250) NULL,
+    description TEXT NULL,
     price DECIMAL(8, 2) NOT NULL,
     category VARCHAR(20),
     quantity INT NOT NULL,
-    weight DECIMAL(8, 2)
+    weight DECIMAL(8, 2),
+    picture TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS drinks(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(250) NULL,
+    description TEXT NULL,
     price DECIMAL(8, 2) NOT NULL,
     category VARCHAR(20),
     quantity INT NOT NULL,
-    size VARCHAR(20)
+    size VARCHAR(20) NOT NULL,
+    picture TEXT NOT NULL
 );
 
 INSERT INTO 
@@ -34,7 +36,8 @@ INSERT INTO
         price,
         category,
         quantity,
-        weight
+        weight,
+        picture
     ) VALUES
     (
         'Bolo de Cenoura',
@@ -42,7 +45,8 @@ INSERT INTO
         15.99,
         'Doces',
         1,
-        120
+        120,
+        'http://localhost:3000/bolo-cenoura.svg'
     ),
     (
         'Petit Gateau',
@@ -50,7 +54,8 @@ INSERT INTO
         23.79,
         'Doces',
         1,
-        240
+        240,
+        'http://localhost:3000/petit-gateau.svg'
     ),
     (
         'Bolo de Fubá',
@@ -58,7 +63,8 @@ INSERT INTO
         7.50,
         'Café da tarde',
         1,
-        100
+        100,
+        'http://localhost:3000/bolo-fuba.svg'
     ),
     (
         'Pão de queijo recheado',
@@ -66,7 +72,8 @@ INSERT INTO
         12.90,
         'Café da tarde',
         4,
-        80
+        80,
+        'http://localhost:3000/pao-queijo-recheado.svg'
     ),
     (
         'Cookies',
@@ -74,7 +81,8 @@ INSERT INTO
         12.00,
         'Doces',
         6,
-        50
+        50,
+        'http://localhost:3000/cookies.svg'
     );
 
     INSERT INTO 
@@ -84,7 +92,8 @@ INSERT INTO
         price,
         category,
         quantity,
-        size
+        size,
+        picture
     ) VALUES
     (
         'Café expresso',
@@ -92,7 +101,8 @@ INSERT INTO
         8.00,
         'Tradicionais',
         1,
-        200
+        200,
+        'http://localhost:3000/cafe-expresso.svg'
     ),
     (
         'Cappuccino',
@@ -100,7 +110,8 @@ INSERT INTO
         12.45,
         'Tradicionais',
         1,
-        200
+        200,
+        'http://localhost:3000/capuccino.svg'
     ),
     (
         'Mocha',
@@ -108,7 +119,8 @@ INSERT INTO
         12.45,
         'Especiais',
         1,
-        180
+        180,
+        'http://localhost:3000/mocha.svg'
     ),
     (
         'Latte de Baunilha',
@@ -116,7 +128,8 @@ INSERT INTO
         17.98,
         'Especiais',
         1,
-        200
+        200,
+        'http://localhost:3000/latte-baunilha.svg'
     ),
     (
         'Macchiato Caramelizado',
@@ -124,6 +137,7 @@ INSERT INTO
         23.99,
         'Especiais',
         1,
-        220
+        220,
+        'http://localhost:3000/macchiato-caramelizado.svg'
     );
 

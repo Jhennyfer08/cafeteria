@@ -10,6 +10,7 @@ class Drinks {
         category,
         quantity,
         size,
+        picture,
     }) {
         this.id = id;
         this.name = name;
@@ -18,6 +19,7 @@ class Drinks {
         this.category = category;
         this.quantity = quantity;
         this.size = size;
+        this.picture = picture;
     }
 
     normalize(text) {
@@ -40,12 +42,38 @@ class Drinks {
             price,
             category,
             quantity,
-            size
+            size,
+            picture
         FROM 
             drinks
         `;
 
         let result = await executeQuery(query);
+        return result[0];
+    }
+
+    async selectDrinkById() {
+        let query = `
+        SELECT  
+            id,
+            name,
+            description,
+            price,
+            category,
+            quantity,
+            size,
+            picture
+        FROM 
+            drinks
+        WHERE
+            id = ?
+        `;
+
+        let params = [
+            this.id
+        ]
+
+        let result = await executeQuery(query, params);
         return result[0];
     }
 
@@ -58,8 +86,10 @@ class Drinks {
                 price,
                 category,
                 quantity,
-                size
+                size,
+                picture
             ) VALUES (
+                ?,
                 ?,
                 ?,
                 ?,
@@ -76,6 +106,7 @@ class Drinks {
             this.normalize(this.category),
             this.quantity,
             this.size,
+            this.picture,
         ];
 
         let result = await executeQuery(query, params);
@@ -91,7 +122,6 @@ class Drinks {
         `;
 
         let params = [this.id];
-
         let result = await executeQuery(query, params);
     }
 }

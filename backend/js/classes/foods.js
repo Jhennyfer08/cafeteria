@@ -10,6 +10,7 @@ class Foods {
         category,
         quantity,
         weight,
+        picture,
     }) {
         this.id = id;
         this.name = name;
@@ -18,6 +19,7 @@ class Foods {
         this.category = category;
         this.quantity = quantity;
         this.weight = weight;
+        this.picture = picture;
     }
 
     normalize(text) {
@@ -40,7 +42,8 @@ class Foods {
                 price,
                 category,
                 quantity,
-                weight
+                weight,
+                picture
             FROM 
                 foods
         `;
@@ -58,7 +61,8 @@ class Foods {
                 price,
                 category,
                 quantity,
-                weight
+                weight,
+                picture
             FROM
                 foods
             WHERE
@@ -75,6 +79,29 @@ class Foods {
         }
     }
 
+    async selectFoodById() {
+        let query = `
+            SELECT  
+                id,
+                name,
+                description,
+                price,
+                category,
+                quantity,
+                weight,
+                picture
+            FROM 
+                foods
+            WHERE
+                id = ?
+        `;
+
+        let params = [this.id];
+
+        let result = await executeQuery(query, params);
+        return result[0];
+    }
+
     async insertFood() {
         let query = `
             INSERT INTO 
@@ -84,8 +111,10 @@ class Foods {
                 price,
                 category,
                 quantity,
-                weight
+                weight,
+                picture
             ) VALUES (
+                ?,
                 ?,
                 ?,
                 ?,
@@ -102,6 +131,7 @@ class Foods {
             this.normalize(this.category),
             this.quantity,
             this.weight,
+            this.picture,
         ];
 
         try {

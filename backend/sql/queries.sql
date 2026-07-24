@@ -5,7 +5,8 @@ SELECT
     price,
     category,
     quantity,
-    weight
+    weight,
+    picture
 FROM 
     foods
 ;
@@ -17,7 +18,8 @@ SELECT
     price,
     category,
     quantity,
-    size
+    size,
+    picture
 FROM 
     drinks
 ;
@@ -29,7 +31,8 @@ SELECT
     price,
     category,
     quantity,
-    weight
+    weight,
+    picture
 FROM
     foods
 WHERE
@@ -47,3 +50,18 @@ DELETE FROM
 WHERE
     id = ?
 ;
+
+SELECT  
+    id,
+    name,
+    description,
+    price,
+    category,
+    quantity,
+    weight,
+    picture
+FROM 
+    foods
+WHERE
+    id = 2;
+
