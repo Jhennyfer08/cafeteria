@@ -119,7 +119,7 @@ app.delete("/foods/:id", async (req, res) => {
         id: req.params.id,
     });
 
-    const food = (await foods.selectFoodById())[0];
+    const food = await foods.selectFoodById();
 
     if (!food) {
         return res.status(404).send({
