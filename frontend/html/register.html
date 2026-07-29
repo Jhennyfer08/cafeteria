@@ -30,9 +30,20 @@
 
             <div class="responsive-menu">
                 <input type="text" placeholder="Buscar.." aria-label="Input de busca">
-                <i class="fi fi-sr-menu-burger"></i>
+
+                <button commandfor="sidebar" command="show-popover">
+                    <i class="fi fi-sr-menu-burger"></i>
+                </button>
             </div>
         </nav>
+
+        <aside class="sidebar" id="sidebar" popover>
+            <ul>
+                <li><i class="fi fi-sr-home"></i><a href="./index.html">Home</a></li>
+                <li><i class="fi fi-sr-restaurant"></i></i><a href="./index.html#menu">Menu</a></li>
+                <li><i class="fi fi-sr-pencil"></i><a href="./register.html">Cadastro</a></li>
+            </ul>
+        </aside>
     </header>
 
     <main class="main">

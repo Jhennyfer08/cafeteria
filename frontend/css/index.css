@@ -39,6 +39,7 @@ html,
     align-items: center;
     justify-content: space-between;
     gap: 10vw;
+    anchor-name: --header;
     background-color: var(--primary-color);
     border-bottom: 10px solid var(--secondary-color);
 
@@ -51,6 +52,11 @@ html,
         object-fit: contain;
     }
 
+    button {
+        background: transparent;
+        border: none;
+    }
+
 }
 
 .nav {
@@ -61,7 +67,7 @@ html,
     justify-content: space-evenly;
     gap: 2rem;
 
-    .responsive-menu{
+    .responsive-menu {
         width: 100%;
     }
 
@@ -92,12 +98,47 @@ html,
     }
 }
 
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
+    height: 100vh;
+    object-fit: contain;
+    border: none;
+    background-color: var(--secondary-color);
+    box-shadow: -4px 10px 4px #301e156c;
+
+    ul {
+        width: 100%;
+        height: 100%;
+        padding: 1.2rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 10rem;
+        font-size: 1.2rem;
+    }
+
+    ul li a {
+        color: var(--text-color);
+        text-decoration: none;
+        margin: 0 .7rem;
+        transition: .3s ease;
+    }
+
+    ul li a:hover {
+        text-decoration: underline;
+    }
+
+}
+
 .main {
     width: 100%;
     padding: 3vw 6%;
     flex-grow: 1;
-
-    /* .banner {} */
 }
 
 .section {

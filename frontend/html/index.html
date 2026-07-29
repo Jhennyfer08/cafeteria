@@ -26,10 +26,12 @@
                 <li><a href="./register.html">Cadastro</a></li>
             </ul>
 
-            
+
             <div class="responsive-menu">
                 <input type="text" placeholder="Buscar.." aria-label="Input de busca">
-                <i class="fi fi-sr-menu-burger"></i>
+                <button commandfor="sidebar" command="show-popover">
+                    <i class="fi fi-sr-menu-burger"></i>
+                </button>
             </div>
         </nav>
     </header>
@@ -61,6 +63,14 @@
 
         </section>
     </main>
+
+    <aside class="sidebar" id="sidebar" popover>
+        <ul>
+            <li><i class="fi fi-sr-home"></i><a href="#">Home</a></li>
+            <li><i class="fi fi-sr-restaurant"></i><a href="#menu">Menu</a></li>
+            <li><i class="fi fi-sr-pencil"></i><a href="./register.html">Cadastro</a></li>
+        </ul>
+    </aside>
 
     <footer class="footer">
         <h1>Kopppii</h1>
