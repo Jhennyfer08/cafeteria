@@ -33,11 +33,11 @@ html,
 .header {
     width: 100%;
     height: auto;
-    padding: 2em;
+    padding: 2em 8%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     gap: 10vw;
     background-color: var(--primary-color);
     border-bottom: 10px solid var(--secondary-color);
@@ -61,12 +61,22 @@ html,
     justify-content: space-evenly;
     gap: 2rem;
 
+    .responsive-menu{
+        width: 100%;
+    }
+
     input {
         width: 100%;
         outline: none;
         padding: .8rem;
         border: none;
+        font-size: 1.2rem;
+        font-weight: bold;
         border-radius: 2rem;
+    }
+
+    i {
+        display: none;
     }
 
     ul li {
@@ -84,8 +94,8 @@ html,
 
 .main {
     width: 100%;
-    padding: 3vw 10vw;
-    flex: 1;
+    padding: 3vw 6%;
+    flex-grow: 1;
 
     /* .banner {} */
 }
@@ -139,7 +149,7 @@ html,
     cursor: pointer;
     transition: .3s ease;
 
-    .fi-sr-circle-xmark{
+    .fi-sr-circle-xmark {
         display: flex;
         align-self: flex-end;
         font-size: 1.2rem;
@@ -167,4 +177,56 @@ html,
     width: 100%;
     padding: 2vw 10vw;
     background-color: var(--secondary-color);
+}
+
+@media (max-width: 1000px) {
+    .header {
+        .logo-container {
+            width: 50%;
+        }
+
+        .nav {
+            width: 100%;
+
+            ul li {
+                margin: 0 .3rem;
+            }
+
+            a {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+
+        .logo-container {
+            width: 70%;
+        }
+
+        .nav {
+            align-items: center;
+            justify-content: center;
+
+            ul {
+                display: none;
+            }
+
+            .responsive-menu {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+
+                i {
+                    font-size: 1.5rem;
+                    display: flex;
+                }
+            }
+        }
+    }
 }
