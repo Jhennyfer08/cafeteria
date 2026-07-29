@@ -74,15 +74,6 @@ INSERT INTO
         4,
         80,
         'http://localhost:3000/pao-queijo-recheado.svg'
-    ),
-    (
-        'Cookies',
-        'Cookies cremosos recheados de nutella com gotas de chocolate',
-        12.00,
-        'Doces',
-        6,
-        50,
-        'http://localhost:3000/cookies.svg'
     );
 
     INSERT INTO 

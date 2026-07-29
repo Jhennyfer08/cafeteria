@@ -1,13 +1,16 @@
 // const APP_URL = process.env.APP_URL;
 
-// async function loadForm(type) {
-//     const response = await 
-// }
+async function loadForm(type) {
+    const response = await fetch(`forms/${type}Form.html`);
+    const html = await response.text();
+
+    document.getElementById("formContainer").innerHTML = html;
+}
 
 async function displayFoods() {
     try {
+        await loadForm("foods");
         const form = document.getElementById("form");
-
         const data = await getProducts("foods");
 
         const foodCard = document.getElementById("foods");
@@ -19,7 +22,7 @@ async function displayFoods() {
             div.innerHTML = `
                 <div class="info-area">
                     <h2>${food.name}</h2>
-                    <span>R$: ${food.price} | ${food.weight} g</span>
+                    <span>R$: ${food.price} | ${food.weight} g | ${food.quantity} Un</span>
                 </div>
 
                 <div class="btn-area">
@@ -30,7 +33,8 @@ async function displayFoods() {
             foodCard.appendChild(div);
         });
 
-        form.onsubmit = registerFood;
+        document.getElementById("foods").classList.remove("hidden");
+        document.getElementById("drinks").classList.add("hidden");
     } catch (error) {
         console.log(`Identified error on displayFoods: ${error}`);
     }
@@ -38,6 +42,7 @@ async function displayFoods() {
 
 async function displayDrinks() {
     try {
+        await loadForm("drinks");
         const form = document.getElementById("form");
         const data = await getProducts("drinks");
 
@@ -50,7 +55,7 @@ async function displayDrinks() {
             div.innerHTML = `
                 <div class="info-area">
                     <h2>${drink.name}</h2>
-                    <span>R$: ${drink.price} | ${drink.size} ml</span>
+                    <span>R$: ${drink.price} | ${drink.size} ml | ${drink.quantity} Und</span>
                 </div>
 
                 <div class="btn-area">
@@ -61,7 +66,8 @@ async function displayDrinks() {
             drinkCard.appendChild(div);
         });
 
-        form.onsubmit = registerDrink;
+        document.getElementById("drinks").classList.remove("hidden");
+        document.getElementById("foods").classList.add("hidden");
     } catch (error) {
         console.log(`Identified error on displayDrinks: ${error}`);
     }
@@ -76,45 +82,16 @@ function fileName() {
     }
 }
 
-function changeProduct(type, option) {
-    const cards = document.querySelectorAll(".card");
+async function changeProduct(option) {
     const slider = document.querySelector(".slider");
-    const form = document.getElementById("form");
-    const item = document.querySelector(".form-item.change");
 
-    const input = item.querySelector("input");
-    const label = item.querySelector("label");
-
-    form.dataset.type = type;
-
-    document.querySelectorAll(".option").forEach((btn) => {
-        btn.classList.remove("active");
-    });
-
-    option.classList.add("active");
-
-    if (type !== "food") {
-        cards[0].classList.add("hidden");
-        cards[1].classList.remove("hidden");
-
-        form.onsubmit = registerDrink;
-
-        input.id = "size";
-        label.textContent = "Tamanho:";
-
-        slider.style.transform = "translateX(100%)";
-    } else {
-        cards[1].classList.add("hidden");
-        cards[0].classList.remove("hidden");
-        form.onsubmit = registerFood;
-
-        input.id = "weight";
-        label.textContent = "Peso:";
-
+    if (option === "food") {
+        await displayFoods();
         slider.style.transform = "translateX(0)";
+    } else {
+        await displayDrinks();
+        slider.style.transform = "translateX(100%)";
     }
-
-    label.setAttribute = ("for", input.id);
 }
 
 //===============================//
@@ -146,10 +123,15 @@ async function create(object, route) {
 }
 
 async function uploadPicture() {
-    const input = document.getElementById("picture").files[0];
+    const input = document.getElementById("picture");
+    const file = input.files[0];
+
+    if (!file) {
+        throw new Error("Nenhuma imagem selecionada.");
+    }
 
     const formData = new FormData();
-    formData.append("picture", input);
+    formData.append("picture", file);
 
     const response = await fetch(`http://localhost:3000/upload`, {
         method: "POST",
@@ -159,10 +141,18 @@ async function uploadPicture() {
     return await response.json();
 }
 
-async function registerFood(event) {
+async function registerFood(event, id = null) {
     event.preventDefault();
 
-    const picture = await uploadPicture();
+    const form = event.target;
+    let picture = form.dataset.picture;
+
+    const input = document.getElementById("picture").files[0];
+
+    if (input) {
+        const images = await uploadPicture();
+        picture = images.url;
+    }
 
     const food = {
         name: document.getElementById("name").value,
@@ -171,13 +161,13 @@ async function registerFood(event) {
         category: document.getElementById("category").value,
         quantity: Number(document.getElementById("quantity").value),
         weight: Number(document.getElementById("weight").value),
-        picture: picture.url,
+        picture: picture,
     };
 
     try {
         let result;
-        if (editing.id) {
-            result = await update("foods", food, editing.id);
+        if (id !== null) {
+            result = await update("foods", food, id);
         } else {
             result = await create(food, "food");
         }
@@ -187,7 +177,7 @@ async function registerFood(event) {
     }
 }
 
-async function registerDrink(event) {
+async function registerDrink(event, id = null) {
     event.preventDefault();
 
     const picture = await uploadPicture();
@@ -204,12 +194,11 @@ async function registerDrink(event) {
 
     try {
         let result;
-        if (editing.id) {
-            result = await update("drinks", drink, editing.id);
+        if (id !== null) {
+            result = await update("drinks", drink, id);
         } else {
             result = await create(drink, "drink");
         }
-        // alert(result.message);
         console.log(result.message);
     } catch (error) {
         console.error(`Identified error on registerDrink: ${error.message}`);
@@ -242,9 +231,6 @@ async function editObject(route, id) {
         const response = await fetch(`http://localhost:3000/${route}/${id}`);
         const object = await response.json();
 
-        editing.id = id;
-        editing.route = route;
-
         ((document.getElementById("name").value = object.name),
             (document.getElementById("description").value = object.description),
             (document.getElementById("price").value = object.price),
@@ -252,23 +238,24 @@ async function editObject(route, id) {
             (document.getElementById("quantity").value = object.quantity));
 
         if (route === "foods") {
-            changeProduct("food", document.querySelectorAll(".option")[0]);
             document.getElementById("weight").value = object.weight;
         } else {
-            changeProduct("drink", document.querySelectorAll(".option")[1]);
             document.getElementById("size").value = object.size;
         }
-
-        document.getElementById("submitBtn").textContent = "Salvar";
 
         const input = document.getElementById("picture");
         const message = document.querySelector(".form-label.picture");
         message.textContent = object.picture.split("/").pop();
 
-        if (input.files.length > 0) {
-            const picture = await uploadPicture();
-            message.textContent = picture.url.split("/").pop();
-        }
+        document.getElementById("submitBtn").textContent = "Salvar";
+
+        form.onsubmit = function (event) {
+            if (route === "foods") {
+                registerFood(event, id);
+            } else {
+                registerDrink(event, id);
+            }
+        };
     } catch (error) {
         console.error(error);
     }
@@ -292,7 +279,7 @@ async function update(route, object, id) {
             );
         }
 
-        console.log(data);
+        return data;
     } catch (error) {
         console.error(`Identified error on editObject: ${error}`);
     }
@@ -301,8 +288,3 @@ async function update(route, object, id) {
 //------------------------------------//
 //          INITIALIZE
 //------------------------------------//
-
-async function initRegister() {
-    await displayFoods();
-    await displayDrinks();
-}

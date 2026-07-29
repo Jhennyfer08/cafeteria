@@ -5,7 +5,7 @@ async function getProducts(route) {
 
         return data;
     } catch (error) {
-        console.log(`Identified error on loadDrinks: ${error}`);
+        console.log(`Identified error on getProducts: ${error}`);
     }
 }
 

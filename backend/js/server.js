@@ -77,6 +77,7 @@ app.post("/upload", upload.single("picture"), (req, res) => {
 });
 
 app.post("/food", async (req, res) => {
+    
     const body = req.body;
     const foods = new Foods(body);
 
@@ -104,7 +105,7 @@ app.put("/foods/:id", async (req, res) => {
         await foods.updateFood();
 
         res.send({
-            message: `Prato ${foods.id} - ${foods.name} atualizada com sucesso`,
+            message: `Prato ${foods.name} atualizada com sucesso`,
         });
     } catch (error) {
         res.send({
