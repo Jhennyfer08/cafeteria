@@ -65,3 +65,17 @@ FROM
 WHERE
     id = 2;
 
+
+UPDATE 
+    foods
+SET 
+    name = ?,
+    description = ?,
+    price = ?,
+    category = ?,
+    quantity = ?,
+    weight = ?,
+    picture = ?
+WHERE
+    id = ?;
+

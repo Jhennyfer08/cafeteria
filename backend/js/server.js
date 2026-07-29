@@ -22,12 +22,17 @@ app.use(express.json());
 app.get("/foods", async (req, res) => {
     const foods = await Foods.selectFoods();
 
-    // const formattedFoods = foods.map((food) => ({
-    //     ...food,
-    //     picture: food.picture?.toString("utf-8") ?? null,
-    // }));
-
     res.send(foods);
+});
+
+app.get("/foods/:id", async (req, res) => {
+    const foods = new Foods({
+        id: req.params.id
+    });
+
+    const food = await foods.selectFoodById();
+
+    res.send(food);
 });
 
 // POST + IMAGE STORAGE
@@ -88,6 +93,26 @@ app.post("/food", async (req, res) => {
     }
 });
 
+app.put("/foods/:id", async (req, res) => {
+    const body = req.body;
+    const foods = new Foods({
+        id: req.params.id,
+        ...body,
+    });
+
+    try {
+        await foods.updateFood();
+
+        res.send({
+            message: `Prato ${foods.id} - ${foods.name} atualizada com sucesso`,
+        });
+    } catch (error) {
+        res.send({
+            message: `Não foi possível atualizar o prato`,
+        });
+    }
+});
+
 app.delete("/foods/:id", async (req, res) => {
     const foods = new Foods({
         id: req.params.id,
@@ -100,10 +125,6 @@ app.delete("/foods/:id", async (req, res) => {
             message: "Prato não encontrado.",
         });
     }
-
-    console.log(food);
-    console.log(food.picture);
-    console.log(typeof food.picture);
 
     const fileName = new URL(food.picture).pathname.split("/").pop();
     await promises.unlink(`${uploadPath}/${fileName}`);
@@ -127,12 +148,17 @@ app.delete("/foods/:id", async (req, res) => {
 app.get("/drinks", async (req, res) => {
     const drinks = await Drinks.selectDrinks();
 
-    // const formattedDrinks = drinks.map((drink) => ({
-    //     ...drink,
-    //     picture: drink.picture?.toString() ?? null,
-    // }));
-
     res.send(drinks);
+});
+
+app.get('/drinks/:id', async (req, res) => {
+    const drinks = new Drinks({
+        id: req.params.id
+    });
+
+    const drink = await drinks.selectDrinkById();
+
+    res.send(drink);
 });
 
 app.post("/drink", async (req, res) => {
@@ -147,6 +173,26 @@ app.post("/drink", async (req, res) => {
     } catch (error) {
         res.send({
             message: `Não foi possível cadastrar a bebida`,
+        });
+    }
+});
+
+app.put("/drinks/:id", async (req, res) => {
+    const body = req.body;
+    const drinks = new Drinks({
+        id: req.params.id,
+        ...body,
+    });
+
+    try {
+        await drinks.updateFood();
+
+        res.send({
+            message: `Bebida ${drinks.id} - ${drinks.name} atualizado com sucesso`,
+        });
+    } catch (error) {
+        res.send({
+            message: `Não foi possível atualizar a bebida`,
         });
     }
 });

@@ -54,19 +54,19 @@ class Drinks {
 
     async selectDrinkById() {
         let query = `
-        SELECT  
-            id,
-            name,
-            description,
-            price,
-            category,
-            quantity,
-            size,
-            picture
-        FROM 
-            drinks
-        WHERE
-            id = ?
+            SELECT  
+                id,
+                name,
+                description,
+                price,
+                category,
+                quantity,
+                size,
+                picture
+            FROM 
+                drinks
+            WHERE
+                id = ?
         `;
 
         let params = [
@@ -74,7 +74,7 @@ class Drinks {
         ]
 
         let result = await executeQuery(query, params);
-        return result[0];
+        return result[0][0];
     }
 
     async insertDrink() {

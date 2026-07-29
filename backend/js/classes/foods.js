@@ -99,7 +99,7 @@ class Foods {
         let params = [this.id];
 
         let result = await executeQuery(query, params);
-        return result[0];
+        return result[0][0];
     }
 
     async insertFood() {
@@ -137,6 +137,41 @@ class Foods {
         try {
             let result = await executeQuery(query, params);
             this.id = result[0].insertId;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    async updateFood() {
+        let query = `
+            UPDATE 
+                foods
+            SET 
+                name = ?,
+                description = ?,
+                price = ?,
+                category = ?,
+                quantity = ?,
+                weight = ?,
+                picture = ?
+            WHERE
+                id = ?
+        `;
+
+        let params = [
+            this.normalize(this.name),
+            this.normalize(this.description),
+            this.price,
+            this.normalize(this.category),
+            this.quantity,
+            this.weight,
+            this.picture,
+            this.id,
+        ];
+
+        try {
+            let result = await executeQuery(query, params);
+            return result[0];
         } catch (error) {
             return null;
         }
