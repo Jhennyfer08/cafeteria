@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/register.css">
     <link rel="shortcut icon" href="../img/logo/koppii.ico" type="image/x-icon">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <script src="../js/server.js"></script>
+    <script src="../js/register.js"></script>
     <title>Cafeteria - Koppii</title>
 </head>
 
-<body class="body">
+<body class="body" onload="initRegister()">
     <header class="header">
         <div class="logo-container">
             <img src="../img/logo/koppii_logo.svg" alt="Logo da Cafeteria Koppii">
@@ -29,15 +32,83 @@
     </header>
 
     <main class="main">
-        <section class="option-section">
-            <a href="./registerFood.html" class="card">
-                <i class="fi fi-sr-bread-loaf"></i>
-                <h2 id="foods">Comidas</h2>
-            </a>
-            <a href="./registerDrink.html" class="card">
-                <i class="fi fi-sr-mug-hot-alt"></i>
-                <h2 id="drinks">Bebidas</h2>
-            </a>
+
+        <form action="" class="form" id="form" data-type="food">
+
+            <article class="form-item">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" id="name" class="form-input" required>
+                <span class="form-span" aria-label="erro de formulário"></span>
+            </article>
+
+            <article class="form-item">
+                <label for="description" class="form-label">Descrição:</label>
+                <textarea class="form-input" id="description"></textarea>
+                <span class="form-span" aria-label="erro de formulário"></span>
+            </article>
+
+            <article class="form-item">
+                <label for="price" class="form-label">Preço:</label>
+                <input type="text" id="price" class="form-input" required>
+                <span class="form-span" aria-label="erro de formulário"></span>
+            </article>
+
+            <article class="form-item">
+                <label for="category" class="form-label">Categoria:</label>
+                <input type="text" id="category" class="form-input" required>
+                <span class="form-span" aria-label="erro de formulário"></span>
+            </article>
+
+            <div class="form-group">
+
+                <article class="form-item">
+                    <label for="quantity" class="form-label">Quantidade:</label>
+                    <input type="text" id="quantity" class="form-input" required>
+                    <span class="form-span" aria-label="erro de formulário"></span>
+                </article>
+
+                <article class="form-item change">
+                    <label for="weight" class="form-label">Peso:</label>
+                    <input type="text" id="weight" class="form-input" required>
+                    <span class="form-span" aria-label="erro de formulário"></span>
+                </article>
+
+            </div>
+
+
+            <article class="form-item">
+                <label for="picture" class="form-label">Selecionar imagem da bebida:</label>
+                <div class="picture-loader">
+                    <label for="picture" class="form-label picture">
+                        <i class="fi fi-sr-graphic-style"></i>
+                        Nenhum arquivo selecionado
+                    </label>
+                    <input type="file" accept="image/*" id="picture" class="form-input" onchange="fileName()" hidden>
+                </div>
+                <span class="form-span" aria-label="erro de formulário"></span>
+            </article>
+
+            <button type="submit" id="submitBtn">Cadastrar</button>
+        </form>
+
+        <section id="menu" class="products-section">
+
+            <nav class="nav-menu">
+                <div class="slider"></div>
+
+                <div class="option active" id="foodsOption" onclick="changeProduct('food', this)">
+                    <i class="fi fi-sr-bread-loaf"></i>
+                    <h2>Comidas</h2>
+                </div>
+
+                <div class="option" id="drinksOption" onclick="changeProduct('drink', this)">
+                    <i class="fi fi-sr-mug-hot-alt"></i>
+                    <h2>Bebidas</h2>
+                </div>
+            </nav>
+
+            <div class="card" id="foods"></div>
+            <div class="card hidden" id="drinks"></div>
         </section>
     </main>
 
@@ -46,6 +117,7 @@
         <nav class="nav">
         </nav>
     </footer>
+
 </body>
 
 </html>

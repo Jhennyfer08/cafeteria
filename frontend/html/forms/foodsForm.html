@@ -1,0 +1,56 @@
+<form action="" class="form" id="form" onsubmit="return registerFood(event)">
+
+    <article class="form-item">
+        <label for="name" class="form-label">Nome:</label>
+        <input type="text" id="name" class="form-input" required>
+        <span class="form-span" aria-label="erro de formulário"></span>
+    </article>
+
+    <article class="form-item">
+        <label for="description" class="form-label">Descrição:</label>
+        <textarea class="form-input" id="description"></textarea>
+        <span class="form-span" aria-label="erro de formulário"></span>
+    </article>
+
+    <article class="form-item">
+        <label for="price" class="form-label">Preço:</label>
+        <input type="text" id="price" class="form-input" required>
+        <span class="form-span" aria-label="erro de formulário"></span>
+    </article>
+
+    <article class="form-item">
+        <label for="category" class="form-label">Categoria:</label>
+        <input type="text" id="category" class="form-input" required>
+        <span class="form-span" aria-label="erro de formulário"></span>
+    </article>
+
+    <div class="form-group">
+
+        <article class="form-item">
+            <label for="quantity" class="form-label">Quantidade:</label>
+            <input type="text" id="quantity" class="form-input" required>
+            <span class="form-span" aria-label="erro de formulário"></span>
+        </article>
+
+        <article class="form-item">
+            <label for="weight" class="form-label">Peso:</label>
+            <input type="text" id="weight" class="form-input" required>
+            <span class="form-span" aria-label="erro de formulário"></span>
+        </article>
+
+    </div>
+
+    <article class="form-item">
+        <label for="picture" class="form-label">Selecionar imagem da comida:</label>
+        <div class="picture-loader">
+            <label for="picture" class="form-label picture">
+                <i class="fi fi-sr-graphic-style"></i>
+                Nenhum arquivo selecionado
+            </label>
+            <input type="file" accept="image/*" id="picture" class="form-input" onchange="fileName()" hidden>
+        </div>
+        <span class="form-span" aria-label="erro de formulário"></span>
+    </article>
+
+    <button type="submit">Cadastrar</button>
+</form>
