@@ -1,13 +1,15 @@
 // const APP_URL = process.env.APP_URL;
 
 async function loadForm(type) {
-    const response = await fetch(`forms/${type}Form.html`);
+    const response = await fetch(`components/forms/${type}Form.html`);
     const html = await response.text();
 
     document.getElementById("formContainer").innerHTML = html;
 }
 
 async function displayFoods() {
+    loadComponents();
+
     try {
         await loadForm("foods");
         const form = document.getElementById("form");

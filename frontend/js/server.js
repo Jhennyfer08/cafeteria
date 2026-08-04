@@ -32,7 +32,35 @@ async function loadProducts(config) {
     }
 }
 
+async function loadComponents() {
+    const header = await fetch(`components/header.html`);
+    let html = await header.text();
+    document.querySelector("header").innerHTML = html;
+
+    const footer = await fetch(`components/footer.html`);
+    html = await footer.text();
+    document.querySelector("footer").innerHTML = html;
+}
+
+async function filter(param) {
+    const foods = await getProducts('foods');
+    foods.forEach( food => {
+        food.filter(param
+
+
+
+            
+
+        );
+    });
+
+
+    const drinks = await getProducts('drinks');
+}
+
 async function initIndex() {
+    loadComponents();
+
     await loadProducts({
         route: "foods",
         measure: "weight",

@@ -22,6 +22,18 @@ html,
     height: 100%;
 }
 
+/*GLOBAL CONFIGURATIONS*/
+ul {
+    list-style: none;
+    font-size: 1.2rem;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .body {
     min-height: 100vh;
     display: flex;
@@ -91,11 +103,6 @@ html,
         font-weight: bold;
         margin: 0rem 1.5rem;
     }
-
-    a {
-        text-decoration: none;
-        color: black;
-    }
 }
 
 .sidebar {
@@ -113,18 +120,14 @@ html,
         width: 100%;
         height: 100%;
         padding: 1.2rem;
-        list-style: none;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
         gap: 10rem;
-        font-size: 1.2rem;
     }
 
     ul li a {
-        color: var(--text-color);
-        text-decoration: none;
         margin: 0 .7rem;
         transition: .3s ease;
     }
@@ -210,15 +213,65 @@ html,
 
     &:hover {
         transform: scale(1.03);
-        /* filter: brightness(130%); */
     }
 }
 
 .footer {
     width: 100%;
     padding: 2vw 10vw;
-    background-color: var(--secondary-color);
+    border-top: .7rem solid var(--secondary-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40rem, .5fr));
+    justify-content: center;
+    text-align: justify;
+    gap: 5rem;
+    background-color: var(--primary-color);
+
+    .about {
+        grid-column: span 1.5;
+
+        .brand {
+            margin-bottom: 1rem;
+
+            span {
+                text-align: center;
+                font-size: 4rem;
+            }
+
+            img {
+                width: 35%;
+            }
+        }
+    }
+
+    .info {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 4rem;
+
+        .social,
+        .contact {
+            display: grid;
+            gap: 2rem;
+
+            h2 {
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+            ul li a {
+                margin: 1rem 0;
+            }
+        }
+    }
 }
+
+ul li a {
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+}
+
 
 @media (max-width: 1000px) {
     .header {
@@ -238,6 +291,40 @@ html,
             }
         }
     }
+}
+
+@media (max-width: 780px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+
+            .social,
+            .contact {
+                h2 {
+                    font-size: 1.2rem;
+                    text-align: center;
+                }
+
+                p {
+                    display: none;
+                }
+
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    gap: 2rem;
+                }
+            }
+        }
+    }
+
+
 }
 
 @media (max-width: 600px) {
