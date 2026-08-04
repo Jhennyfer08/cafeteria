@@ -1,3 +1,4 @@
+<script src="../../js/server.js"></script>
 
 <div class="logo-container">
     <img src="../img/logo/koppii_logo.svg" alt="Logo da Cafeteria Koppii">
@@ -11,7 +12,7 @@
     </ul>
 
     <div class="responsive-menu">
-        <input type="text" placeholder="Buscar.." aria-label="Input de busca">
+        <input type="text" placeholder="Buscar.." aria-label="Input de busca" oninput="filterProducts(this.value)">
 
         <button commandfor="sidebar" command="show-popover">
             <i class="fi fi-sr-menu-burger"></i>

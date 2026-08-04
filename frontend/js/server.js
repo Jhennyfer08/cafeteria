@@ -9,9 +9,17 @@ async function getProducts(route) {
     }
 }
 
-async function loadProducts(config) {
+async function loadProducts(config, data = null) {
     try {
-        const data = await getProducts(config.route);
+        if (!data) {
+            const data = await getProducts(config.route);
+
+            if (config.route === "foods") {
+                foodsData = data;
+            } else {
+                drinksData = data;
+            }
+        }
 
         const objectCard = document.getElementById(config.route);
         objectCard.innerHTML = "";
@@ -42,20 +50,37 @@ async function loadComponents() {
     document.querySelector("footer").innerHTML = html;
 }
 
-async function filter(param) {
-    const foods = await getProducts('foods');
-    foods.forEach( food => {
-        food.filter(param
+async function filterProducts(value) {
 
+    value = value.toLowerCase().trim();
 
-
-            
-
-        );
+    const filteredFoods = foodsData.filter(food => {
+        return Object.values(food)        
+        .join(" ")
+        .toLowerCase()
+        .include(value);
     });
 
+    const filteredDrinks = drinksData.filter(food => {
+        return Object.values(drink)        
+        .join(" ")
+        .toLowerCase()
+        .include(value);
+    });
 
-    const drinks = await getProducts('drinks');
+   await loadProducts({
+        route: "foods",
+        measure: "weight",
+        unit: "g",
+    },
+    filteredFoods);
+
+    await loadProducts({
+        route: "drinks",
+        measure: "size",
+        unit: "ml",
+    },
+    filteredDrinks);
 }
 
 async function initIndex() {
