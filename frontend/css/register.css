@@ -148,6 +148,8 @@
     z-index: 1;
     transition: .3s ease;
 
+    cursor: pointer;
+
     &:hover {
         font-size: 1.2em;
     }

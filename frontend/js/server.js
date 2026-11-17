@@ -11,19 +11,19 @@ async function getProducts(route) {
 
 async function loadProducts(config, data = null) {
     try {
-
         if (!data) {
             data = await getProducts(config.route);
 
             if (config.route === "foods") {
                 foodsData = data;
-            } else if (config.route === "drinks") {
+            } else {
                 drinksData = data;
             }
         }
 
         const objectCard = document.getElementById(config.route);
         objectCard.innerHTML = "";
+
 
         data.forEach((item) => {
             const div = document.createElement("div");
@@ -41,40 +41,52 @@ async function loadProducts(config, data = null) {
     }
 }
 
-async function searchProducts(value) {
+async function loadComponents() {
+    const header = await fetch(`components/header.html`);
+    let html = await header.text();
+    document.querySelector("header").innerHTML = html;
+
+    const footer = await fetch(`components/footer.html`);
+    html = await footer.text();
+    document.querySelector("footer").innerHTML = html;
+}
+
+async function filterProducts(value) {
 
     value = value.toLowerCase().trim();
 
-    const filteredFood = foodsData.filter(food => {
-        return Object.values(food)
-            .join(" ")
-            .toLowerCase()
-            .includes(value)
+    const filteredFoods = foodsData.filter(food => {
+        return Object.values(food)        
+        .join(" ")
+        .toLowerCase()
+        .include(value);
     });
 
-    const filteredDrink = drinksData.filter(drink => {
-        return Object.values(drink)
-            .join(" ")
-            .toLowerCase()
-            .includes(value)
+    const filteredDrinks = drinksData.filter(food => {
+        return Object.values(drink)        
+        .join(" ")
+        .toLowerCase()
+        .include(value);
     });
 
-    await loadProducts({
+   await loadProducts({
         route: "foods",
         measure: "weight",
         unit: "g",
     },
-        filteredFood);
+    filteredFoods);
 
     await loadProducts({
         route: "drinks",
         measure: "size",
         unit: "ml",
     },
-        filteredDrink);
+    filteredDrinks);
 }
 
 async function initIndex() {
+    loadComponents();
+
     await loadProducts({
         route: "foods",
         measure: "weight",
