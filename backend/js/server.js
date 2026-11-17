@@ -186,7 +186,7 @@ app.put("/drinks/:id", async (req, res) => {
     });
 
     try {
-        await drinks.updateFood();
+        await drinks.updateDrink();
 
         res.send({
             message: `Bebida ${drinks.id} - ${drinks.name} atualizado com sucesso`,

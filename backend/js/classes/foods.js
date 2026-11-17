@@ -1,4 +1,3 @@
-import { response } from "express";
 import { executeQuery } from "../db/db.js";
 
 class Foods {

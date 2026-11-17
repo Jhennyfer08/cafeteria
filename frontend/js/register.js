@@ -132,6 +132,7 @@ async function uploadPicture() {
 
     const formData = new FormData();
     formData.append("picture", file);
+    console.log(formData);
 
     const response = await fetch(`http://localhost:3000/upload`, {
         method: "POST",
@@ -171,7 +172,9 @@ async function registerFood(event, id = null) {
         } else {
             result = await create(food, "food");
         }
-        console.log(result.message);
+
+        await displayFoods();
+        alert(result.message);
     } catch (error) {
         console.error(`Identified error on registerFood: ${error.message}`);
     }
@@ -180,7 +183,16 @@ async function registerFood(event, id = null) {
 async function registerDrink(event, id = null) {
     event.preventDefault();
 
-    const picture = await uploadPicture();
+    const form = event.target;
+    let picture = form.dataset.picture;
+    console.log(picture);
+
+    const input = document.getElementById("picture").files[0];
+
+    if (input) {
+        const images = await uploadPicture();
+        picture = images.url;
+    }
 
     const drink = {
         name: document.getElementById("name").value,
@@ -189,7 +201,7 @@ async function registerDrink(event, id = null) {
         category: document.getElementById("category").value,
         quantity: Number(document.getElementById("quantity").value),
         size: Number(document.getElementById("size").value),
-        picture: picture.url,
+        picture: picture,
     };
 
     try {
@@ -199,7 +211,10 @@ async function registerDrink(event, id = null) {
         } else {
             result = await create(drink, "drink");
         }
-        console.log(result.message);
+        
+        await displayDrinks();
+        alert(result.message);
+        console.log(result);
     } catch (error) {
         console.error(`Identified error on registerDrink: ${error.message}`);
     }
@@ -235,7 +250,8 @@ async function editObject(route, id) {
             (document.getElementById("description").value = object.description),
             (document.getElementById("price").value = object.price),
             (document.getElementById("category").value = object.category),
-            (document.getElementById("quantity").value = object.quantity));
+            (document.getElementById("quantity").value = object.quantity)
+        );
 
         if (route === "foods") {
             document.getElementById("weight").value = object.weight;
@@ -243,7 +259,8 @@ async function editObject(route, id) {
             document.getElementById("size").value = object.size;
         }
 
-        const input = document.getElementById("picture");
+        form.dataset.picture = object.picture;
+        // const input = document.getElementById("picture");
         const message = document.querySelector(".form-label.picture");
         message.textContent = object.picture.split("/").pop();
 

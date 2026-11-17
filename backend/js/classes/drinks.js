@@ -112,6 +112,41 @@ class Drinks {
         let result = await executeQuery(query, params);
         this.id = result[0].insertId;
     }
+    
+    async updateDrink() {
+        let query = `
+            UPDATE 
+                drinks
+            SET 
+                name = ?,
+                description = ?,
+                price = ?,
+                category = ?,
+                quantity = ?,
+                size = ?,
+                picture = ?
+            WHERE
+                id = ?
+        `;
+
+        let params = [
+            this.normalize(this.name),
+            this.normalize(this.description),
+            this.price,
+            this.normalize(this.category),
+            this.quantity,
+            this.size,
+            this.picture,
+            this.id,
+        ];
+
+        try {
+            let result = await executeQuery(query, params);
+            return result[0];
+        } catch (error) {
+            return null;
+        }
+    }
 
     async deleteDrink() {
         let query = `

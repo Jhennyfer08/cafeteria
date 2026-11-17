@@ -9,9 +9,18 @@ async function getProducts(route) {
     }
 }
 
-async function loadProducts(config) {
+async function loadProducts(config, data = null) {
     try {
-        const data = await getProducts(config.route);
+
+        if (!data) {
+            data = await getProducts(config.route);
+
+            if (config.route === "foods") {
+                foodsData = data;
+            } else if (config.route === "drinks") {
+                drinksData = data;
+            }
+        }
 
         const objectCard = document.getElementById(config.route);
         objectCard.innerHTML = "";
@@ -30,6 +39,39 @@ async function loadProducts(config) {
     } catch (error) {
         console.log(`Identified error on loadProducts: ${error}`);
     }
+}
+
+async function searchProducts(value) {
+
+    value = value.toLowerCase().trim();
+
+    const filteredFood = foodsData.filter(food => {
+        return Object.values(food)
+            .join(" ")
+            .toLowerCase()
+            .includes(value)
+    });
+
+    const filteredDrink = drinksData.filter(drink => {
+        return Object.values(drink)
+            .join(" ")
+            .toLowerCase()
+            .includes(value)
+    });
+
+    await loadProducts({
+        route: "foods",
+        measure: "weight",
+        unit: "g",
+    },
+        filteredFood);
+
+    await loadProducts({
+        route: "drinks",
+        measure: "size",
+        unit: "ml",
+    },
+        filteredDrink);
 }
 
 async function initIndex() {
